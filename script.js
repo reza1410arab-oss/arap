@@ -18,17 +18,17 @@ const dataGame = {
     },
 
     2: {
-        nama: "GATES OF GATOT KACA",
+        nama: "GAME 2",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Gates Of Gatot Kaca Super Scatter
 
 ✅❎❎ 18x Manual DC OFF
 ❎✅❎ 13x Quick DC ON
-❎✅❎ 25x Quick DC ON`],
+❎❎❎ 25x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     3: {
-        nama: "WILD BANDITO",
+        nama: "GAME 3",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Wild Bandito
 
 🔥 15x SPIN OTOMATIS TURBO ON
@@ -39,19 +39,19 @@ const dataGame = {
     },
 
     4: {
-        nama: "SWEET BONANZA",
+        nama: "GAME 4",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Sweet Bonanza SUPER SCATTER
 
 ✅❎❎ 22x Manual DC OFF
 ❎✅❎ 9x Quick DC ON
 ❎✅✅ 15x Manual DC OFF
 ✅❎✅ 10x Quick DC ON
-❎✅❎ 23x Quick DC ON`],
+❎❎❎ 23x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     5: {
-        nama: "WILD BOUNTY SHOWDOWN",
+        nama: "GAME 5",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Wild Bounty SHOWDOWN
 
 🔥 10x SPIN OTOMATIS TURBO ON
@@ -62,19 +62,19 @@ const dataGame = {
     },
 
     6: {
-        nama: "GATES OF OLYMPUS",
+        nama: "GAME 6",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - GATES OF OLYMPUS
 
 ✅❎❎ 11x Manual DC OFF
 ❎✅❎ 21x Quick DC ON
 ❎✅✅ 17x Manual DC OFF
 ✅❎✅ 7x Quick DC ON
-❎✅❎ 15x Quick DC ON`],
+❎❎❎ 15x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     7: {
-        nama: "MAHJONG WAYS 2",
+        nama: "GAME 7",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Mahjong Ways 2
 
 🔥 10x SPIN OTOMATIS TURBO ON
@@ -85,19 +85,19 @@ const dataGame = {
     },
 
     8: {
-        nama: "STARLIGHT PRINCESS",
+        nama: "GAME 8",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Starlight Princess SUPER SCATTER
 
 ✅❎❎ 18x Manual DC OFF
 ❎✅❎ 8x Quick DC ON
 ❎✅✅ 13x Manual DC OFF
 ✅❎✅ 10x Quick DC ON
-❎✅❎ 25x Quick DC ON`],
+❎❎❎ 25x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     9: {
-        nama: "CAISHEN WINS",
+        nama: "GAME 9",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Caishen WINS
 
 🔥 10x SPIN OTOMATIS TURBO ON
@@ -108,19 +108,19 @@ const dataGame = {
     },
 
     10: {
-        nama: "DRAGON POTS",
+        nama: "GAME 10",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Dragon POTS
 
 ✅❎❎ 17x Manual DC OFF
-❎✅❎ 12x Manual DC OFF
+❎❎❎ 12x Manual DC OFF
 ❎✅❎ 8x Quick DC ON
 ✅❎✅ 10x Quick DC ON
-❎✅❎ 30x Quick DC ON`],
+❎❎❎ 30x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     11: {
-        nama: "MAFIA MAYHEM",
+        nama: "GAME 11",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Mafia Mayhem
 
 🔥 20x SPIN OTOMATIS TURBO ON
@@ -131,19 +131,19 @@ const dataGame = {
     },
 
     12: {
-        nama: "GREAT GHOSTS",
+        nama: "GAME 12",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Great Ghosts
 
 ✅❎❎ 15x Manual DC OFF
 ❎✅❎ 10x Quick DC ON
 ❎✅✅ 8x Manual DC OFF
 ✅❎✅ 20x Quick DC ON
-❎✅❎ 15x Quick DC ON`],
+❎❎❎ 15x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     13: {
-        nama: "DRAGON HATCH",
+        nama: "GAME 13",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Dragon Hatch
 
 🔥 10x SPIN OTOMATIS TURBO ON
@@ -154,19 +154,19 @@ const dataGame = {
     },
 
     14: {
-        nama: "AZTEC GEMS",
+        nama: "GAME 14",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Aztec Gems
 
 ✅❎❎ 16x Manual DC OFF
 ❎✅❎ 9x Quick DC ON
 ❎✅✅ 15x Manual DC OFF
 ✅❎✅ 8x Quick DC ON
-❎✅❎ 30x Quick DC ON`],
+❎❎❎ 30x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
     15: {
-        nama: "PINATA WINS",
+        nama: "GAME 15",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Pinata WINS
 
 🔥 30x SPIN MANUAL TURBO OFF
@@ -176,226 +176,49 @@ const dataGame = {
     },
 
     16: {
-        nama: "WISDOM OF ANTHENA 1000",
+        nama: "GAME 16",
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Wisdom OF ANTHENA 1000
 
 ✅❎❎ 10x Manual DC OFF
 ❎✅❎ 9x Quick DC ON
 ❎✅✅ 18x Manual DC OFF
 ✅❎✅ 15x Quick DC ON
-❎✅❎ 20x Quick DC ON`],
+❎❎❎ 20x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
-    },
-
-    // ========================================
-    // GAME 17 - 36
-    // ========================================
-
-    17: {
-        nama: "GAME 17",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 15x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 10 putaran biasa → istirahat → lanjut 10 putaran."]
-    },
-
-    18: {
-        nama: "GAME 18",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 8x SPIN OTOMATIS TURBO ON
-🔥 12x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola ringan: 5 putaran → 10 putaran → jeda singkat."]
-    },
-
-    19: {
-        nama: "GAME 19",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 15x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 15 putaran biasa → istirahat → lanjut 10 putaran."]
-    },
-
-    20: {
-        nama: "GAME 20",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 8 putaran manual → 8 putaran otomatis → jeda."]
-    },
-
-    21: {
-        nama: "GAME 21",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 15x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 10 putaran turbo → 10 putaran biasa → istirahat."]
-    },
-
-    22: {
-        nama: "GAME 22",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 5 putaran → 5 putaran → 10 putaran → jeda."]
-    },
-
-    23: {
-        nama: "GAME 23",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 12x SPIN OTOMATIS TURBO ON
-🔥 8x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 12 putaran biasa → 8 putaran turbo → istirahat."]
-    },
-
-    24: {
-        nama: "GAME 24",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 5x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 10 putaran manual → 5 putaran otomatis → jeda."]
-    },
-
-    25: {
-        nama: "GAME 25",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 7x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 7 putaran biasa → 10 putaran turbo → istirahat."]
-    },
-
-    26: {
-        nama: "GAME 26",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 5x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 5 putaran manual → 5 putaran turbo → 10 putaran biasa."]
-    },
-
-    27: {
-        nama: "GAME 27",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 10 putaran biasa → istirahat → lanjut 10 putaran."]
-    },
-
-    28: {
-        nama: "GAME 28",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 8x SPIN MANUAL TURBO OFF
-🔥 8x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 8 putaran manual → 8 putaran otomatis → jeda."]
-    },
-
-    29: {
-        nama: "GAME 29",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 15x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 15 putaran biasa → 5 putaran turbo → istirahat."]
-    },
-
-    30: {
-        nama: "GAME 30",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola ringan: 10 putaran otomatis → 5 putaran manual → jeda."]
-    },
-
-    31: {
-        nama: "GAME 31",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola santai: 5 putaran biasa → 10 putaran turbo → 5 putaran biasa."]
-    },
-
-    32: {
-        nama: "GAME 32",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 10x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 10 putaran manual → istirahat → lanjut 10 putaran."]
-    },
-
-    33: {
-        nama: "GAME 33",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 12x SPIN OTOMATIS TURBO ON
-🔥 8x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 12 putaran biasa → 8 putaran turbo → jeda."]
-    },
-
-    34: {
-        nama: "GAME 34",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 15x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 5 putaran manual → 10 putaran otomatis → istirahat."]
-    },
-
-    35: {
-        nama: "GAME 35",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 15x SPIN OTOMATIS TURBO ON`],
-        pola: ["Pola santai: 10 putaran turbo → 5 putaran biasa → jeda."]
-    },
-
-    36: {
-        nama: "GAME 36",
-        saran: [`Dicoba bermain di game ini bos, lagi gacor bosku.
-
-🔥 5x SPIN MANUAL TURBO OFF
-🔥 10x SPIN OTOMATIS TURBO ON
-🔥 5x SPIN MANUAL TURBO OFF`],
-        pola: ["Pola ringan: 5 putaran → 10 putaran → 5 putaran → istirahat."]
     }
 
 };
 
 
 // ========================================
-// ACAK
+// GAME 17 - 36
+// FORMAT SAMA SEPERTI GAME 1-16
+// ========================================
+
+for (let i = 17; i <= 36; i++) {
+
+    dataGame[i] = {
+        nama: `GAME ${i}`,
+
+        saran: [
+            `Dicoba bermain di game ini bos, lagi gacor bosku 🔥
+
+🔥 10x SPIN OTOMATIS TURBO ON
+🔥 8x SPIN MANUAL TURBO OFF
+🔥 20x SPIN OTOMATIS TURBO ON
+🔥 15x SPIN MANUAL TURBO OFF`
+        ],
+
+        pola: [
+            "Pola santai: 10 putaran biasa → istirahat sebentar → lanjut 10 putaran."
+        ]
+    };
+
+}
+
+
+// ========================================
+// ACAK DATA
 // ========================================
 
 function ambilAcak(data) {
@@ -473,8 +296,6 @@ async function copyFotoGame(img, button) {
 
     if (!img.complete || img.naturalWidth === 0) {
 
-        console.error("❌ FOTO BELUM SELESAI DIMUAT");
-
         button.innerHTML = "⏳ TUNGGU FOTO";
 
         setTimeout(() => {
@@ -484,20 +305,10 @@ async function copyFotoGame(img, button) {
         return;
     }
 
-    if (!navigator.clipboard) {
+    if (!navigator.clipboard ||
+        typeof ClipboardItem === "undefined") {
 
-        console.error("❌ CLIPBOARD TIDAK TERSEDIA");
-
-        button.innerHTML = "❌ CLIPBOARD ERROR";
-
-        return;
-    }
-
-    if (typeof ClipboardItem === "undefined") {
-
-        console.error("❌ CLIPBOARD ITEM TIDAK DIDUKUNG");
-
-        button.innerHTML = "❌ BROWSER TIDAK SUPPORT";
+        button.innerHTML = "❌ TIDAK SUPPORT";
 
         return;
     }
@@ -514,11 +325,7 @@ async function copyFotoGame(img, button) {
         });
 
         if (!response.ok) {
-
-            throw new Error(
-                "Foto gagal diambil. HTTP " + response.status
-            );
-
+            throw new Error("Foto gagal diambil");
         }
 
         const blob = await response.blob();
@@ -538,30 +345,23 @@ async function copyFotoGame(img, button) {
 
         const pngBlob = await new Promise((resolve, reject) => {
 
-            canvas.toBlob(
-                hasil => {
+            canvas.toBlob(function (hasil) {
 
-                    if (hasil) {
-                        resolve(hasil);
-                    } else {
-                        reject(
-                            new Error("Canvas gagal membuat PNG")
-                        );
-                    }
+                if (hasil) {
+                    resolve(hasil);
+                } else {
+                    reject(new Error("Gagal membuat PNG"));
+                }
 
-                },
-                "image/png"
-            );
+            }, "image/png");
 
         });
 
-        const item = new ClipboardItem({
-            "image/png": pngBlob
-        });
-
-        await navigator.clipboard.write([item]);
-
-        console.log("✅ FOTO BERHASIL DICOPY");
+        await navigator.clipboard.write([
+            new ClipboardItem({
+                "image/png": pngBlob
+            })
+        ]);
 
         button.innerHTML = "📸 FOTO COPIED ✔";
 
@@ -572,12 +372,11 @@ async function copyFotoGame(img, button) {
 
         }, 1800);
 
+        console.log("✅ FOTO BERHASIL DICOPY");
+
     } catch (error) {
 
-        console.error(
-            "❌ FOTO GAGAL DICOPY:",
-            error
-        );
+        console.error("❌ COPY FOTO GAGAL:", error);
 
         button.innerHTML = "❌ COPY FOTO GAGAL";
 
@@ -614,7 +413,7 @@ function polaGame(id, button) {
 
 
 // ========================================
-// CARI FOTO
+// CARI FOTO OTOMATIS
 // ========================================
 
 function cariFoto(i, img) {
@@ -658,7 +457,7 @@ function cariFoto(i, img) {
         img.onload = function () {
 
             console.log(
-                `✅ FOTO ${i} OK: ${path}`
+                `✅ FOTO GAME ${i} BERHASIL: ${path}`
             );
 
         };
@@ -685,81 +484,77 @@ function cariFoto(i, img) {
 // TANPA TULISAN GAME 1 - GAME 36
 // ========================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        const container =
-            document.getElementById("gameContainer");
+    const container =
+        document.getElementById("gameContainer");
 
-        if (!container) {
+    if (!container) {
 
-            console.error(
-                "❌ gameContainer tidak ditemukan"
-            );
-
-            return;
-
-        }
-
-        container.innerHTML = "";
-
-        for (let i = 1; i <= 36; i++) {
-
-            const game = dataGame[i];
-
-            if (!game) continue;
-
-            const gameBox =
-                document.createElement("article");
-
-            gameBox.className = "game-box";
-
-            gameBox.innerHTML = `
-
-                <div class="image-wrapper">
-
-                    <img
-                        class="game-image"
-                        alt=""
-                    >
-
-                </div>
-
-                <div class="button-group">
-
-                    <button
-                        type="button"
-                        class="btn btn-saran"
-                        onclick="saranGame(${i}, this)"
-                    >
-                        🎯 SARAN GAME
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-pola"
-                        onclick="polaGame(${i}, this)"
-                    >
-                        🔥 POLA GAME
-                    </button>
-
-                </div>
-
-            `;
-
-            const img =
-                gameBox.querySelector(".game-image");
-
-            cariFoto(i, img);
-
-            container.appendChild(gameBox);
-
-        }
-
-        console.log(
-            "✅ 36 GAME SELESAI DIBUAT TANPA JUDUL GAME"
+        console.error(
+            "❌ gameContainer tidak ditemukan"
         );
 
+        return;
     }
-);
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 36; i++) {
+
+        const game = dataGame[i];
+
+        if (!game) continue;
+
+        const gameBox =
+            document.createElement("article");
+
+        gameBox.className = "game-box";
+
+        gameBox.innerHTML = `
+
+            <div class="image-wrapper">
+
+                <img
+                    class="game-image"
+                    alt="Foto game"
+                >
+
+            </div>
+
+            <div class="button-group">
+
+                <button
+                    type="button"
+                    class="btn btn-saran"
+                    onclick="saranGame(${i}, this)"
+                >
+                    🎯 SARAN GAME
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-pola"
+                    onclick="polaGame(${i}, this)"
+                >
+                    🔥 POLA GAME
+                </button>
+
+            </div>
+
+        `;
+
+        const img =
+            gameBox.querySelector(".game-image");
+
+        cariFoto(i, img);
+
+        container.appendChild(gameBox);
+
+    }
+
+    console.log(
+        "✅ 36 GAME SELESAI"
+    );
+
+});
