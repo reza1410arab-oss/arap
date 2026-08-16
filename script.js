@@ -247,7 +247,6 @@ async function copyTeks(text, button) {
 
     }
 
-
     if (!berhasil) {
 
         const textarea = document.createElement("textarea");
@@ -275,7 +274,6 @@ async function copyTeks(text, button) {
         textarea.remove();
 
     }
-
 
     if (button && berhasil) {
 
@@ -322,9 +320,44 @@ function saranGame(id, button) {
 
 async function copyFotoGame(img, button) {
 
-    if (!img || !img.src) {
+    if (!img || !img.complete || !img.naturalWidth) {
 
-        console.error("❌ Foto game tidak ditemukan");
+        console.error("❌ Foto belum selesai dimuat");
+
+        if (button) {
+
+            button.innerHTML = "⏳ FOTO BELUM SIAP";
+
+            setTimeout(function () {
+
+                button.innerHTML = "🔥 POLA GAME";
+
+            }, 1500);
+
+        }
+
+        return;
+
+    }
+
+    if (
+        !navigator.clipboard ||
+        typeof ClipboardItem === "undefined"
+    ) {
+
+        console.error("❌ Browser tidak mendukung copy gambar");
+
+        if (button) {
+
+            button.innerHTML = "❌ TIDAK DIDUKUNG";
+
+            setTimeout(function () {
+
+                button.innerHTML = "🔥 POLA GAME";
+
+            }, 1500);
+
+        }
 
         return;
 
@@ -332,110 +365,80 @@ async function copyFotoGame(img, button) {
 
     try {
 
-        const response = await fetch(img.src);
+        const canvas = document.createElement("canvas");
 
-        if (!response.ok) {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
 
-            throw new Error("Foto gagal diambil");
+        const ctx = canvas.getContext("2d");
 
-        }
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            img.naturalWidth,
+            img.naturalHeight
+        );
 
-        const blob = await response.blob();
+        canvas.toBlob(async function (blob) {
 
-        const gambar = new Image();
+            if (!blob) {
 
-        gambar.onload = async function () {
+                console.error("❌ Gagal membuat gambar");
 
-            try {
-
-                const canvas = document.createElement("canvas");
-
-                canvas.width = gambar.naturalWidth;
-                canvas.height = gambar.naturalHeight;
-
-                const ctx = canvas.getContext("2d");
-
-                ctx.drawImage(
-                    gambar,
-                    0,
-                    0,
-                    gambar.naturalWidth,
-                    gambar.naturalHeight
-                );
-
-                canvas.toBlob(async function (hasil) {
-
-                    if (!hasil) {
-
-                        console.error("❌ Gagal membuat gambar");
-
-                        return;
-
-                    }
-
-                    try {
-
-                        await navigator.clipboard.write([
-                            new ClipboardItem({
-                                [hasil.type || blob.type]: hasil
-                            })
-                        ]);
-
-
-                        if (button) {
-
-                            const teksAwal = button.innerHTML;
-
-                            button.innerHTML = "COPIED FOTO ✔";
-                            button.disabled = true;
-
-                            setTimeout(function () {
-
-                                button.innerHTML = teksAwal;
-                                button.disabled = false;
-
-                            }, 1500);
-
-                        }
-
-                        console.log("✅ FOTO BERHASIL DICOPY");
-
-                    } catch (error) {
-
-                        console.error(
-                            "❌ Browser tidak mengizinkan copy foto:",
-                            error
-                        );
-
-                    }
-
-                }, blob.type || "image/png");
-
-            } catch (error) {
-
-                console.error(
-                    "❌ Gagal memproses foto:",
-                    error
-                );
+                return;
 
             }
 
-        };
+            try {
 
-        gambar.onerror = function () {
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        "image/png": blob
+                    })
+                ]);
 
-            console.error("❌ Gambar gagal diproses");
+                console.log("✅ FOTO GAME BERHASIL DICOPY");
 
-        };
+                if (button) {
 
-        gambar.src = URL.createObjectURL(blob);
+                    const teksAwal = button.innerHTML;
+
+                    button.innerHTML = "📸 FOTO COPIED ✔";
+                    button.disabled = true;
+
+                    setTimeout(function () {
+
+                        button.innerHTML = teksAwal;
+                        button.disabled = false;
+
+                    }, 1500);
+
+                }
+
+            } catch (error) {
+
+                console.error("❌ COPY FOTO GAGAL:", error);
+
+                if (button) {
+
+                    button.innerHTML = "❌ GAGAL COPY";
+
+                    setTimeout(function () {
+
+                        button.innerHTML = "🔥 POLA GAME";
+
+                    }, 1500);
+
+                }
+
+            }
+
+        }, "image/png");
 
     } catch (error) {
 
-        console.error(
-            "❌ Gagal mengambil foto:",
-            error
-        );
+        console.error("❌ ERROR COPY FOTO:", error);
 
     }
 
@@ -443,7 +446,7 @@ async function copyFotoGame(img, button) {
 
 
 // ========================================
-// POLA GAME
+// POLA GAME = COPY FOTO
 // ========================================
 
 function polaGame(id, button) {
@@ -452,7 +455,7 @@ function polaGame(id, button) {
 
     if (!game) {
 
-        console.error("Game tidak ditemukan:", id);
+        console.error("❌ Game tidak ditemukan:", id);
 
         return;
 
@@ -462,7 +465,7 @@ function polaGame(id, button) {
 
     if (!gameBox) {
 
-        console.error("Game box tidak ditemukan");
+        console.error("❌ Game box tidak ditemukan");
 
         return;
 
@@ -519,6 +522,7 @@ function cariFoto(i, img) {
             );
 
             img.removeAttribute("src");
+
             img.alt = "Foto game " + i + " tidak ditemukan";
 
             return;
