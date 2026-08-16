@@ -46,7 +46,7 @@ const dataGame = {
 ❎✅❎ 9x Quick DC ON
 ❎✅✅ 15x Manual DC OFF
 ✅❎✅ 10x Quick DC ON
-❎✅❎ 23x Quick DC ON`],
+❎❎❎ 23x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
@@ -250,7 +250,7 @@ async function copyTeks(text, button) {
 
             setTimeout(() => {
                 button.innerHTML = oldText;
-            }, 1500);
+            }, 1000);
 
         }
 
@@ -282,113 +282,161 @@ function saranGame(id, button) {
 
 
 // ========================================
-// COPY FOTO GAME
+// CACHE FOTO
+// FOTO DISIAPKAN SEBELUM DIKLIK
 // ========================================
 
-async function copyFotoGame(img, button) {
+const fotoCache = {};
 
-    if (!img || !img.complete || img.naturalWidth === 0) {
 
-        console.error("❌ FOTO BELUM SIAP");
+// ========================================
+// SIAPKAN FOTO UNTUK COPY
+// ========================================
 
-        if (button) {
+function siapkanFoto(img, id) {
+
+    if (!img) return;
+
+    if (!img.complete || !img.naturalWidth) {
+        return;
+    }
+
+    try {
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            img.naturalWidth,
+            img.naturalHeight
+        );
+
+        canvas.toBlob(function (blob) {
+
+            if (blob) {
+
+                fotoCache[id] = blob;
+
+                console.log(
+                    "📸 FOTO GAME " + id + " SIAP"
+                );
+
+            }
+
+        }, "image/png");
+
+    } catch (error) {
+
+        console.error(
+            "CACHE FOTO GAGAL:",
+            id,
+            error
+        );
+
+    }
+
+}
+
+
+// ========================================
+// COPY FOTO INSTAN
+// ========================================
+
+async function copyFotoGame(img, button, id) {
+
+    if (!navigator.clipboard ||
+        typeof ClipboardItem === "undefined") {
+
+        console.error(
+            "❌ Browser tidak mendukung copy foto"
+        );
+
+        return;
+
+    }
+
+    const blob = fotoCache[id];
+
+    if (!blob) {
+
+        console.warn(
+            "Foto belum masuk cache, menyiapkan sekarang..."
+        );
+
+        if (!img || !img.complete || !img.naturalWidth) {
+
             button.innerHTML = "⏳ FOTO BELUM SIAP";
 
             setTimeout(() => {
                 button.innerHTML = "🔥 POLA GAME";
-            }, 1500);
+            }, 1000);
+
+            return;
+
         }
 
-        return;
-    }
+        siapkanFoto(img, id);
 
-    if (
-        !navigator.clipboard ||
-        typeof ClipboardItem === "undefined"
-    ) {
+        button.innerHTML = "⏳ MENYIAPKAN...";
 
-        console.error("❌ BROWSER TIDAK SUPPORT COPY FOTO");
+        setTimeout(() => {
 
-        if (button) {
-            button.innerHTML = "❌ TIDAK DIDUKUNG";
-        }
+            copyFotoGame(img, button, id);
+
+        }, 100);
 
         return;
-    }
 
-    button.disabled = true;
-    button.innerHTML = "⏳ MENYALIN FOTO...";
+    }
 
     try {
 
-        const url = img.currentSrc || img.src;
-
-        const response = await fetch(url, {
-            cache: "no-cache"
-        });
-
-        if (!response.ok) {
-            throw new Error("HTTP " + response.status);
-        }
-
-        const blob = await response.blob();
-
-        const bitmap = await createImageBitmap(blob);
-
-        const canvas = document.createElement("canvas");
-
-        canvas.width = bitmap.width;
-        canvas.height = bitmap.height;
-
-        const ctx = canvas.getContext("2d");
-
-        ctx.drawImage(bitmap, 0, 0);
-
-        bitmap.close();
-
-        const pngBlob = await new Promise((resolve, reject) => {
-
-            canvas.toBlob((hasil) => {
-
-                if (hasil) {
-                    resolve(hasil);
-                } else {
-                    reject(new Error("Gagal membuat PNG"));
-                }
-
-            }, "image/png");
-
-        });
-
+        // Clipboard langsung
         await navigator.clipboard.write([
             new ClipboardItem({
-                "image/png": pngBlob
+                "image/png": blob
             })
         ]);
 
-        console.log("✅ FOTO BERHASIL DICOPY");
+        console.log(
+            "✅ FOTO GAME " + id + " LANGSUNG TERSALIN"
+        );
 
-        button.innerHTML = "📸 FOTO COPIED ✔";
+        const oldText = button.innerHTML;
+
+        button.innerHTML = "📸 COPIED ✔";
+
+        button.disabled = true;
 
         setTimeout(() => {
 
-            button.innerHTML = "🔥 POLA GAME";
+            button.innerHTML = oldText;
             button.disabled = false;
 
-        }, 1800);
+        }, 1000);
 
     } catch (error) {
 
-        console.error("❌ COPY FOTO GAGAL:", error);
+        console.error(
+            "❌ COPY FOTO GAGAL:",
+            error
+        );
 
-        button.innerHTML = "❌ COPY FOTO GAGAL";
+        button.innerHTML = "❌ GAGAL";
 
         setTimeout(() => {
 
             button.innerHTML = "🔥 POLA GAME";
             button.disabled = false;
 
-        }, 2000);
+        }, 1200);
 
     }
 
@@ -402,15 +450,21 @@ async function copyFotoGame(img, button) {
 
 function polaGame(id, button) {
 
-    const gameBox = button.closest(".game-box");
+    const gameBox =
+        button.closest(".game-box");
 
     if (!gameBox) return;
 
-    const img = gameBox.querySelector(".game-image");
+    const img =
+        gameBox.querySelector(".game-image");
 
     if (!img) return;
 
-    copyFotoGame(img, button);
+    copyFotoGame(
+        img,
+        button,
+        id
+    );
 
 }
 
@@ -453,14 +507,22 @@ function cariFoto(i, img) {
             img.removeAttribute("src");
 
             return;
+
         }
 
-        const path = daftarFoto[index];
+        const path =
+            daftarFoto[index];
 
         img.onload = function () {
 
             console.log(
-                `✅ FOTO ${i} BERHASIL: ${path}`
+                `✅ FOTO GAME ${i} SIAP: ${path}`
+            );
+
+            // LANGSUNG BUAT CACHE
+            siapkanFoto(
+                img,
+                i
             );
 
         };
@@ -491,7 +553,9 @@ document.addEventListener(
     function () {
 
         const container =
-            document.getElementById("gameContainer");
+            document.getElementById(
+                "gameContainer"
+            );
 
         if (!container) {
 
@@ -500,24 +564,33 @@ document.addEventListener(
             );
 
             return;
+
         }
 
         container.innerHTML = "";
 
-        for (let i = 1; i <= 36; i++) {
+        for (
+            let i = 1;
+            i <= 36;
+            i++
+        ) {
 
-            const game = dataGame[i];
+            const game =
+                dataGame[i];
 
             if (!game) continue;
 
             const gameBox =
-                document.createElement("article");
+                document.createElement(
+                    "article"
+                );
 
-            gameBox.className = "game-box";
+            gameBox.className =
+                "game-box";
 
 
             // ========================================
-            // TANPA JUDUL GAME DI BAWAH FOTO
+            // TANPA TULISAN GAME 1 - 36
             // ========================================
 
             gameBox.innerHTML = `
@@ -553,16 +626,28 @@ document.addEventListener(
 
             `;
 
+
             const img =
-                gameBox.querySelector(".game-image");
+                gameBox.querySelector(
+                    ".game-image"
+                );
 
-            cariFoto(i, img);
 
-            container.appendChild(gameBox);
+            cariFoto(
+                i,
+                img
+            );
+
+
+            container.appendChild(
+                gameBox
+            );
 
         }
 
-        console.log("✅ 36 GAME SELESAI DIBUAT");
+        console.log(
+            "✅ 36 GAME SELESAI DIBUAT"
+        );
 
     }
 );
