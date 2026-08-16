@@ -185,24 +185,133 @@ const dataGame = {
 ✅❎✅ 15x Quick DC ON
 ❎✅❎ 20x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
+    },
+
+    // ========================================
+    // GAME 17 - 36
+    // ========================================
+
+    17: {
+        nama: "GAME 17",
+        saran: ["GAME 17 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 10 putaran biasa → 5 putaran turbo → istirahat sebentar."]
+    },
+
+    18: {
+        nama: "GAME 18",
+        saran: ["GAME 18 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 5 putaran manual → 10 putaran otomatis → jeda singkat."]
+    },
+
+    19: {
+        nama: "GAME 19",
+        saran: ["GAME 19 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 15 putaran biasa → istirahat → lanjut 10 putaran."]
+    },
+
+    20: {
+        nama: "GAME 20",
+        saran: ["GAME 20 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 8 putaran manual → 8 putaran otomatis → jeda singkat."]
+    },
+
+    21: {
+        nama: "GAME 21",
+        saran: ["GAME 21 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 10 putaran turbo → 10 putaran biasa → istirahat."]
+    },
+
+    22: {
+        nama: "GAME 22",
+        saran: ["GAME 22 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 5 putaran → 5 putaran → 10 putaran → jeda."]
+    },
+
+    23: {
+        nama: "GAME 23",
+        saran: ["GAME 23 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 12 putaran biasa → 8 putaran turbo → istirahat."]
+    },
+
+    24: {
+        nama: "GAME 24",
+        saran: ["GAME 24 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 10 putaran manual → 5 putaran otomatis → jeda singkat."]
+    },
+
+    25: {
+        nama: "GAME 25",
+        saran: ["GAME 25 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 7 putaran biasa → 10 putaran turbo → istirahat."]
+    },
+
+    26: {
+        nama: "GAME 26",
+        saran: ["GAME 26 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 5 putaran manual → 5 putaran turbo → 10 putaran biasa."]
+    },
+
+    27: {
+        nama: "GAME 27",
+        saran: ["GAME 27 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 10 putaran biasa → istirahat sebentar → lanjut 10 putaran."]
+    },
+
+    28: {
+        nama: "GAME 28",
+        saran: ["GAME 28 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 8 putaran manual → 8 putaran otomatis → jeda singkat."]
+    },
+
+    29: {
+        nama: "GAME 29",
+        saran: ["GAME 29 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 15 putaran biasa → 5 putaran turbo → istirahat."]
+    },
+
+    30: {
+        nama: "GAME 30",
+        saran: ["GAME 30 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 10 putaran otomatis → 5 putaran manual → jeda."]
+    },
+
+    31: {
+        nama: "GAME 31",
+        saran: ["GAME 31 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 5 putaran biasa → 10 putaran turbo → 5 putaran biasa."]
+    },
+
+    32: {
+        nama: "GAME 32",
+        saran: ["GAME 32 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 10 putaran manual → istirahat → lanjut 10 putaran."]
+    },
+
+    33: {
+        nama: "GAME 33",
+        saran: ["GAME 33 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 12 putaran biasa → 8 putaran turbo → jeda."]
+    },
+
+    34: {
+        nama: "GAME 34",
+        saran: ["GAME 34 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 5 putaran manual → 10 putaran otomatis → istirahat."]
+    },
+
+    35: {
+        nama: "GAME 35",
+        saran: ["GAME 35 - SARAN SEMENTARA"],
+        pola: ["Pola santai: 10 putaran turbo → 5 putaran biasa → jeda singkat."]
+    },
+
+    36: {
+        nama: "GAME 36",
+        saran: ["GAME 36 - SARAN SEMENTARA"],
+        pola: ["Pola ringan: 5 putaran → 10 putaran → 5 putaran → istirahat."]
     }
 
 };
-
-
-// ========================================
-// GAME 17 - 36
-// ========================================
-
-for (let i = 17; i <= 36; i++) {
-
-    dataGame[i] = {
-        nama: `GAME ${i}`,
-        saran: [`GAME ${i} - SARAN SEMENTARA`],
-        pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
-    };
-
-}
 
 
 // ========================================
@@ -278,8 +387,10 @@ function saranGame(id, button) {
 async function copyFotoGame(img, button) {
 
     if (!img) {
+
         console.error("❌ IMG TIDAK ADA");
         return;
+
     }
 
     if (!img.complete || img.naturalWidth === 0) {
@@ -293,6 +404,7 @@ async function copyFotoGame(img, button) {
         }, 1500);
 
         return;
+
     }
 
 
@@ -303,6 +415,7 @@ async function copyFotoGame(img, button) {
         button.innerHTML = "❌ CLIPBOARD ERROR";
 
         return;
+
     }
 
 
@@ -313,6 +426,7 @@ async function copyFotoGame(img, button) {
         button.innerHTML = "❌ BROWSER TIDAK SUPPORT";
 
         return;
+
     }
 
 
@@ -322,27 +436,22 @@ async function copyFotoGame(img, button) {
 
     try {
 
-        /*
-         * Ambil URL foto yang BENAR-BENAR sedang tampil.
-         */
         const url = img.currentSrc || img.src;
 
-        console.log("📸 FOTO YANG AKAN DICOPY:");
-        console.log(url);
+        console.log("📸 FOTO YANG AKAN DICOPY:", url);
 
 
-        /*
-         * Download foto dari server.
-         */
         const response = await fetch(url, {
             cache: "no-cache"
         });
 
 
         if (!response.ok) {
+
             throw new Error(
                 "Foto gagal diambil. HTTP " + response.status
             );
+
         }
 
 
@@ -355,10 +464,6 @@ async function copyFotoGame(img, button) {
         );
 
 
-        /*
-         * Ubah menjadi PNG supaya Clipboard
-         * menerima format gambar yang stabil.
-         */
         const bitmap = await createImageBitmap(blob);
 
         const canvas = document.createElement("canvas");
@@ -383,11 +488,15 @@ async function copyFotoGame(img, button) {
                 blobHasil => {
 
                     if (blobHasil) {
+
                         resolve(blobHasil);
+
                     } else {
+
                         reject(
                             new Error("Canvas gagal membuat PNG")
                         );
+
                     }
 
                 },
@@ -397,16 +506,6 @@ async function copyFotoGame(img, button) {
         });
 
 
-        console.log(
-            "🖼️ PNG SIAP:",
-            pngBlob.size
-        );
-
-
-        /*
-         * INI BAGIAN PENTING:
-         * FOTO BENAR-BENAR MASUK CLIPBOARD.
-         */
         const item = new ClipboardItem({
             "image/png": pngBlob
         });
