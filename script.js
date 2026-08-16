@@ -1,3 +1,5 @@
+"use strict";
+
 // ========================================
 // DATA GAME
 // ========================================
@@ -235,7 +237,6 @@ async function copyTeks(text, button) {
         if (navigator.clipboard && window.isSecureContext) {
 
             await navigator.clipboard.writeText(text);
-
             berhasil = true;
 
         }
@@ -252,7 +253,6 @@ async function copyTeks(text, button) {
         const textarea = document.createElement("textarea");
 
         textarea.value = text;
-
         textarea.style.position = "fixed";
         textarea.style.top = "0";
         textarea.style.left = "-9999px";
@@ -337,6 +337,79 @@ function polaGame(id, button) {
 
 
 // ========================================
+// CARI FOTO OTOMATIS
+// ========================================
+
+function cariFoto(i, img) {
+
+    const daftarFoto = [
+
+        `./game${i}.jpg`,
+        `./game${i}.jpeg`,
+        `./game${i}.png`,
+        `./game${i}.webp`,
+
+        `./Game${i}.jpg`,
+        `./Game${i}.jpeg`,
+        `./Game${i}.png`,
+        `./Game${i}.webp`,
+
+        `./GAME${i}.jpg`,
+        `./GAME${i}.jpeg`,
+        `./GAME${i}.png`,
+        `./GAME${i}.webp`
+
+    ];
+
+    let index = 0;
+
+    function cobaFoto() {
+
+        if (index >= daftarFoto.length) {
+
+            console.error(
+                "❌ SEMUA FOTO GAME " + i + " TIDAK DITEMUKAN"
+            );
+
+            img.removeAttribute("src");
+
+            img.alt = "Foto game " + i + " tidak ditemukan";
+
+            return;
+        }
+
+        const path = daftarFoto[index];
+
+        img.src = path;
+
+        img.onload = function () {
+
+            console.log(
+                "✅ FOTO GAME " + i + " BERHASIL: " + path
+            );
+
+        };
+
+        img.onerror = function () {
+
+            console.log(
+                "❌ Tidak ditemukan: " + path
+            );
+
+            index++;
+
+            cobaFoto();
+
+        };
+
+    }
+
+    cobaFoto();
+
+}
+
+
+// ========================================
 // BUAT 36 GAME
 // ========================================
 
@@ -347,6 +420,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!container) {
 
         console.error("❌ gameContainer tidak ditemukan!");
+
         return;
 
     }
@@ -368,13 +442,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ========================================
-        // PATH FOTO
-        // ========================================
-
-        const imagePath = "./game" + i + ".jpg";
-
-
-        // ========================================
         // HTML GAME
         // ========================================
 
@@ -383,7 +450,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="image-wrapper">
 
                 <img
-                    src="${imagePath}"
+                    class="game-image"
                     alt="${game.nama}"
                 >
 
@@ -417,29 +484,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ========================================
-        // CEK GAMBAR
+        // CARI FOTO
         // ========================================
 
-        const img = gameBox.querySelector("img");
+        const img = gameBox.querySelector(".game-image");
 
-
-        img.onload = function () {
-
-            console.log("✅ FOTO BERHASIL: " + imagePath);
-
-        };
-
-
-        img.onerror = function () {
-
-            console.error("❌ FOTO TIDAK DITEMUKAN: " + imagePath);
-
-            this.setAttribute(
-                "alt",
-                "Foto game " + i + " tidak ditemukan"
-            );
-
-        };
+        cariFoto(i, img);
 
 
         // ========================================
