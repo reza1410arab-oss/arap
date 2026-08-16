@@ -317,6 +317,132 @@ function saranGame(id, button) {
 
 
 // ========================================
+// COPY FOTO GAME
+// ========================================
+
+async function copyFotoGame(img, button) {
+
+    if (!img || !img.src) {
+
+        console.error("❌ Foto game tidak ditemukan");
+
+        return;
+
+    }
+
+    try {
+
+        const response = await fetch(img.src);
+
+        if (!response.ok) {
+
+            throw new Error("Foto gagal diambil");
+
+        }
+
+        const blob = await response.blob();
+
+        const gambar = new Image();
+
+        gambar.onload = async function () {
+
+            try {
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = gambar.naturalWidth;
+                canvas.height = gambar.naturalHeight;
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(
+                    gambar,
+                    0,
+                    0,
+                    gambar.naturalWidth,
+                    gambar.naturalHeight
+                );
+
+                canvas.toBlob(async function (hasil) {
+
+                    if (!hasil) {
+
+                        console.error("❌ Gagal membuat gambar");
+
+                        return;
+
+                    }
+
+                    try {
+
+                        await navigator.clipboard.write([
+                            new ClipboardItem({
+                                [hasil.type || blob.type]: hasil
+                            })
+                        ]);
+
+
+                        if (button) {
+
+                            const teksAwal = button.innerHTML;
+
+                            button.innerHTML = "COPIED FOTO ✔";
+                            button.disabled = true;
+
+                            setTimeout(function () {
+
+                                button.innerHTML = teksAwal;
+                                button.disabled = false;
+
+                            }, 1500);
+
+                        }
+
+                        console.log("✅ FOTO BERHASIL DICOPY");
+
+                    } catch (error) {
+
+                        console.error(
+                            "❌ Browser tidak mengizinkan copy foto:",
+                            error
+                        );
+
+                    }
+
+                }, blob.type || "image/png");
+
+            } catch (error) {
+
+                console.error(
+                    "❌ Gagal memproses foto:",
+                    error
+                );
+
+            }
+
+        };
+
+        gambar.onerror = function () {
+
+            console.error("❌ Gambar gagal diproses");
+
+        };
+
+        gambar.src = URL.createObjectURL(blob);
+
+    } catch (error) {
+
+        console.error(
+            "❌ Gagal mengambil foto:",
+            error
+        );
+
+    }
+
+}
+
+
+// ========================================
 // POLA GAME
 // ========================================
 
@@ -325,13 +451,34 @@ function polaGame(id, button) {
     const game = dataGame[id];
 
     if (!game) {
+
         console.error("Game tidak ditemukan:", id);
+
         return;
+
     }
 
-    const hasil = ambilAcak(game.pola);
+    const gameBox = button.closest(".game-box");
 
-    copyTeks(hasil, button);
+    if (!gameBox) {
+
+        console.error("Game box tidak ditemukan");
+
+        return;
+
+    }
+
+    const img = gameBox.querySelector(".game-image");
+
+    if (!img) {
+
+        console.error("❌ Foto game tidak ditemukan");
+
+        return;
+
+    }
+
+    copyFotoGame(img, button);
 
 }
 
@@ -372,10 +519,10 @@ function cariFoto(i, img) {
             );
 
             img.removeAttribute("src");
-
             img.alt = "Foto game " + i + " tidak ditemukan";
 
             return;
+
         }
 
         const path = daftarFoto[index];
@@ -425,16 +572,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
     container.innerHTML = "";
-
 
     for (let i = 1; i <= 36; i++) {
 
         const game = dataGame[i];
 
         if (!game) continue;
-
 
         const gameBox = document.createElement("article");
 
@@ -499,7 +643,6 @@ document.addEventListener("DOMContentLoaded", function () {
         container.appendChild(gameBox);
 
     }
-
 
     console.log("✅ 36 GAME SELESAI DIBUAT");
 
