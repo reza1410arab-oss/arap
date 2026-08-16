@@ -22,9 +22,7 @@ const dataGame = {
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PRAGMATIC PLAY - Gates Of Gatot Kaca Super Scatter
 
 ✅❎❎ 18x Manual DC OFF
-❎✅❎ 8x Quick DC ON
-❎✅✅ 13x Manual DC OFF
-✅❎✅ 10x Quick DC ON
+❎✅❎ 13x Quick DC ON
 ❎✅❎ 25x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
@@ -208,7 +206,7 @@ for (let i = 17; i <= 36; i++) {
 
 
 // ========================================
-// ACAK DATA
+// ACAK
 // ========================================
 
 function ambilAcak(data) {
@@ -223,77 +221,32 @@ function ambilAcak(data) {
 
 
 // ========================================
-// COPY TEKS
+// COPY TEXT
 // ========================================
 
 async function copyTeks(text, button) {
 
     if (!text) return;
 
-    let berhasil = false;
-
     try {
 
-        if (
-            navigator.clipboard &&
-            navigator.clipboard.writeText
-        ) {
+        await navigator.clipboard.writeText(text);
 
-            await navigator.clipboard.writeText(text);
+        if (button) {
 
-            berhasil = true;
+            const oldText = button.innerHTML;
+
+            button.innerHTML = "COPIED ✔";
+
+            setTimeout(() => {
+                button.innerHTML = oldText;
+            }, 1500);
 
         }
 
     } catch (error) {
 
-        console.log("Clipboard API gagal:", error);
-
-    }
-
-
-    if (!berhasil) {
-
-        const textarea = document.createElement("textarea");
-
-        textarea.value = text;
-
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-
-        document.body.appendChild(textarea);
-
-        textarea.focus();
-        textarea.select();
-
-        try {
-
-            berhasil = document.execCommand("copy");
-
-        } catch (error) {
-
-            console.log("Copy gagal:", error);
-
-        }
-
-        textarea.remove();
-
-    }
-
-
-    if (button && berhasil) {
-
-        const teksAwal = button.innerHTML;
-
-        button.innerHTML = "COPIED ✔";
-        button.disabled = true;
-
-        setTimeout(() => {
-
-            button.innerHTML = teksAwal;
-            button.disabled = false;
-
-        }, 1500);
+        console.error("COPY TEXT GAGAL:", error);
 
     }
 
@@ -301,205 +254,198 @@ async function copyTeks(text, button) {
 
 
 // ========================================
-// SARAN GAME = COPY TEKS
+// SARAN GAME
 // ========================================
 
 function saranGame(id, button) {
 
     const game = dataGame[id];
 
-    if (!game) {
+    if (!game) return;
 
-        console.error("Game tidak ditemukan:", id);
-
-        return;
-
-    }
-
-    const hasil = ambilAcak(game.saran);
-
-    copyTeks(hasil, button);
+    copyTeks(
+        ambilAcak(game.saran),
+        button
+    );
 
 }
 
 
 // ========================================
-// COPY FOTO GAME
+// COPY FOTO
 // ========================================
 
-function copyFotoGame(img, button) {
+async function copyFotoGame(img, button) {
 
     if (!img) {
-
-        console.error("❌ FOTO TIDAK DITEMUKAN");
-
+        console.error("❌ IMG TIDAK ADA");
         return;
-
     }
 
     if (!img.complete || img.naturalWidth === 0) {
 
         console.error("❌ FOTO BELUM SELESAI DIMUAT");
 
-        if (button) {
+        button.innerHTML = "⏳ TUNGGU FOTO";
 
-            button.innerHTML = "⏳ FOTO BELUM SIAP";
-
-            setTimeout(() => {
-
-                button.innerHTML = "🔥 POLA GAME";
-
-            }, 1500);
-
-        }
+        setTimeout(() => {
+            button.innerHTML = "🔥 POLA GAME";
+        }, 1500);
 
         return;
-
     }
 
 
-    if (
-        !navigator.clipboard ||
-        !navigator.clipboard.write ||
-        typeof ClipboardItem === "undefined"
-    ) {
+    if (!navigator.clipboard) {
 
-        console.error("❌ COPY FOTO TIDAK DIDUKUNG BROWSER");
+        console.error("❌ CLIPBOARD TIDAK TERSEDIA");
 
-        if (button) {
-
-            button.innerHTML = "❌ TIDAK DIDUKUNG";
-
-        }
+        button.innerHTML = "❌ CLIPBOARD ERROR";
 
         return;
-
     }
 
 
-    // ========================================
-    // CANVAS
-    // ========================================
+    if (typeof ClipboardItem === "undefined") {
 
-    const canvas = document.createElement("canvas");
+        console.error("❌ CLIPBOARD ITEM TIDAK DIDUKUNG");
 
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
+        button.innerHTML = "❌ BROWSER TIDAK SUPPORT";
 
-    const ctx = canvas.getContext("2d");
+        return;
+    }
+
+
+    button.disabled = true;
+    button.innerHTML = "⏳ MENYALIN FOTO...";
+
 
     try {
+
+        /*
+         * Ambil URL foto yang BENAR-BENAR sedang tampil.
+         */
+        const url = img.currentSrc || img.src;
+
+        console.log("📸 FOTO YANG AKAN DICOPY:");
+        console.log(url);
+
+
+        /*
+         * Download foto dari server.
+         */
+        const response = await fetch(url, {
+            cache: "no-cache"
+        });
+
+
+        if (!response.ok) {
+            throw new Error(
+                "Foto gagal diambil. HTTP " + response.status
+            );
+        }
+
+
+        const blob = await response.blob();
+
+        console.log(
+            "📦 FOTO BERHASIL DIAMBIL:",
+            blob.type,
+            blob.size
+        );
+
+
+        /*
+         * Ubah menjadi PNG supaya Clipboard
+         * menerima format gambar yang stabil.
+         */
+        const bitmap = await createImageBitmap(blob);
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+
+        const ctx = canvas.getContext("2d");
 
         ctx.drawImage(
-            img,
+            bitmap,
             0,
-            0,
-            img.naturalWidth,
-            img.naturalHeight
+            0
         );
 
-    } catch (error) {
-
-        console.error("❌ GAGAL MEMPROSES FOTO:", error);
-
-        return;
-
-    }
+        bitmap.close();
 
 
-    // ========================================
-    // PROMISE BLOB
-    // ========================================
+        const pngBlob = await new Promise((resolve, reject) => {
 
-    const blobPromise = new Promise((resolve, reject) => {
+            canvas.toBlob(
+                blobHasil => {
 
-        canvas.toBlob(
-            blob => {
+                    if (blobHasil) {
+                        resolve(blobHasil);
+                    } else {
+                        reject(
+                            new Error("Canvas gagal membuat PNG")
+                        );
+                    }
 
-                if (blob) {
-
-                    resolve(blob);
-
-                } else {
-
-                    reject(
-                        new Error("Gagal membuat PNG")
-                    );
-
-                }
-
-            },
-            "image/png"
-        );
-
-    });
-
-
-    // ========================================
-    // COPY FOTO
-    // ========================================
-
-    try {
-
-        const item = new ClipboardItem({
-
-            "image/png": blobPromise
+                },
+                "image/png"
+            );
 
         });
 
 
-        navigator.clipboard.write([item])
-            .then(() => {
-
-                console.log("✅ FOTO GAME BERHASIL DICOPY");
-
-
-                if (button) {
-
-                    const teksAwal = button.innerHTML;
-
-                    button.innerHTML = "📸 FOTO COPIED ✔";
-                    button.disabled = true;
-
-                    setTimeout(() => {
-
-                        button.innerHTML = teksAwal;
-                        button.disabled = false;
-
-                    }, 1500);
-
-                }
-
-            })
-            .catch(error => {
-
-                console.error(
-                    "❌ COPY FOTO GAGAL:",
-                    error
-                );
+        console.log(
+            "🖼️ PNG SIAP:",
+            pngBlob.size
+        );
 
 
-                if (button) {
+        /*
+         * INI BAGIAN PENTING:
+         * FOTO BENAR-BENAR MASUK CLIPBOARD.
+         */
+        const item = new ClipboardItem({
+            "image/png": pngBlob
+        });
 
-                    button.innerHTML = "❌ GAGAL COPY";
 
-                    setTimeout(() => {
+        await navigator.clipboard.write([item]);
 
-                        button.innerHTML = "🔥 POLA GAME";
-                        button.disabled = false;
 
-                    }, 2000);
+        console.log("✅ FOTO BERHASIL MASUK CLIPBOARD");
 
-                }
 
-            });
+        button.innerHTML = "📸 FOTO COPIED ✔";
+
+
+        setTimeout(() => {
+
+            button.innerHTML = "🔥 POLA GAME";
+            button.disabled = false;
+
+        }, 1800);
+
 
     } catch (error) {
 
         console.error(
-            "❌ ERROR CLIPBOARD:",
+            "❌ FOTO TIDAK BERHASIL DICOPY:",
             error
         );
+
+
+        button.innerHTML = "❌ COPY FOTO GAGAL";
+
+
+        setTimeout(() => {
+
+            button.innerHTML = "🔥 POLA GAME";
+            button.disabled = false;
+
+        }, 2000);
 
     }
 
@@ -507,10 +453,14 @@ function copyFotoGame(img, button) {
 
 
 // ========================================
-// POLA GAME = COPY FOTO
+// POLA GAME
+// KLIK = COPY FOTO
 // ========================================
 
 function polaGame(id, button) {
+
+    console.log("🔥 POLA GAME DIKLIK:", id);
+
 
     const gameBox = button.closest(".game-box");
 
@@ -527,21 +477,20 @@ function polaGame(id, button) {
 
     if (!img) {
 
-        console.error("❌ FOTO GAME TIDAK DITEMUKAN");
+        console.error("❌ GAMBAR TIDAK DITEMUKAN");
 
         return;
 
     }
 
 
-    // LANGSUNG COPY FOTO GAME
     copyFotoGame(img, button);
 
 }
 
 
 // ========================================
-// CARI FOTO OTOMATIS
+// CARI FOTO
 // ========================================
 
 function cariFoto(i, img) {
@@ -574,13 +523,10 @@ function cariFoto(i, img) {
         if (index >= daftarFoto.length) {
 
             console.error(
-                "❌ FOTO GAME " + i + " TIDAK DITEMUKAN"
+                `❌ FOTO GAME ${i} TIDAK DITEMUKAN`
             );
 
             img.removeAttribute("src");
-
-            img.alt =
-                "Foto game " + i + " tidak ditemukan";
 
             return;
 
@@ -589,15 +535,11 @@ function cariFoto(i, img) {
 
         const path = daftarFoto[index];
 
-        img.src = path;
-
 
         img.onload = function () {
 
             console.log(
-                "✅ FOTO GAME " +
-                i +
-                " BERHASIL: " +
+                `✅ GAME ${i} FOTO OK:`,
                 path
             );
 
@@ -606,16 +548,14 @@ function cariFoto(i, img) {
 
         img.onerror = function () {
 
-            console.log(
-                "❌ TIDAK DITEMUKAN: " +
-                path
-            );
-
             index++;
 
             cobaFoto();
 
         };
+
+
+        img.src = path;
 
     }
 
@@ -640,7 +580,7 @@ document.addEventListener(
         if (!container) {
 
             console.error(
-                "❌ gameContainer tidak ditemukan!"
+                "❌ gameContainer tidak ditemukan"
             );
 
             return;
@@ -660,6 +600,7 @@ document.addEventListener(
 
             const gameBox =
                 document.createElement("article");
+
 
             gameBox.className = "game-box";
 
