@@ -46,7 +46,7 @@ const dataGame = {
 ❎✅❎ 9x Quick DC ON
 ❎✅✅ 15x Manual DC OFF
 ✅❎✅ 10x Quick DC ON
-❎❎❎ 23x Quick DC ON`],
+❎✅❎ 23x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
     },
 
@@ -113,7 +113,7 @@ const dataGame = {
 
 ✅❎❎ 17x Manual DC OFF
 ❎❎❎ 12x Manual DC OFF
-❎✅❎ 8x Quick DC ON
+❎❎❎ 8x Quick DC ON
 ✅❎✅ 10x Quick DC ON
 ❎❎❎ 30x Quick DC ON`],
         pola: ["Pola ringan: 5 putaran → 5 putaran → jeda singkat."]
@@ -192,25 +192,23 @@ const dataGame = {
 
 // ========================================
 // GAME 17 - 36
-// FORMAT SAMA SEPERTI GAME 1-16
 // ========================================
 
 for (let i = 17; i <= 36; i++) {
 
     dataGame[i] = {
-        nama: `GAME ${i}`,
-
+        nama: "",
         saran: [
-            `Dicoba bermain di game ini bos, lagi gacor bosku 🔥
+            `Dicoba bermain di game ini bos, lagi gacor bosku.
 
 🔥 10x SPIN OTOMATIS TURBO ON
-🔥 8x SPIN MANUAL TURBO OFF
-🔥 20x SPIN OTOMATIS TURBO ON
-🔥 15x SPIN MANUAL TURBO OFF`
+🔥 5x SPIN MANUAL TURBO OFF
+🔥 10x SPIN OTOMATIS TURBO ON
+🔥 5x SPIN MANUAL TURBO OFF`
         ],
-
         pola: [
-            "Pola santai: 10 putaran biasa → istirahat sebentar → lanjut 10 putaran."
+            "Pola santai: 10 putaran biasa → istirahat sebentar → lanjut 10 putaran.",
+            "Pola ringan: 5 putaran → 5 putaran → jeda singkat."
         ]
     };
 
@@ -218,7 +216,7 @@ for (let i = 17; i <= 36; i++) {
 
 
 // ========================================
-// ACAK DATA
+// ACAK
 // ========================================
 
 function ambilAcak(data) {
@@ -289,26 +287,31 @@ function saranGame(id, button) {
 
 async function copyFotoGame(img, button) {
 
-    if (!img) {
-        console.error("❌ IMG TIDAK ADA");
+    if (!img || !img.complete || img.naturalWidth === 0) {
+
+        console.error("❌ FOTO BELUM SIAP");
+
+        if (button) {
+            button.innerHTML = "⏳ FOTO BELUM SIAP";
+
+            setTimeout(() => {
+                button.innerHTML = "🔥 POLA GAME";
+            }, 1500);
+        }
+
         return;
     }
 
-    if (!img.complete || img.naturalWidth === 0) {
+    if (
+        !navigator.clipboard ||
+        typeof ClipboardItem === "undefined"
+    ) {
 
-        button.innerHTML = "⏳ TUNGGU FOTO";
+        console.error("❌ BROWSER TIDAK SUPPORT COPY FOTO");
 
-        setTimeout(() => {
-            button.innerHTML = "🔥 POLA GAME";
-        }, 1500);
-
-        return;
-    }
-
-    if (!navigator.clipboard ||
-        typeof ClipboardItem === "undefined") {
-
-        button.innerHTML = "❌ TIDAK SUPPORT";
+        if (button) {
+            button.innerHTML = "❌ TIDAK DIDUKUNG";
+        }
 
         return;
     }
@@ -325,7 +328,7 @@ async function copyFotoGame(img, button) {
         });
 
         if (!response.ok) {
-            throw new Error("Foto gagal diambil");
+            throw new Error("HTTP " + response.status);
         }
 
         const blob = await response.blob();
@@ -345,7 +348,7 @@ async function copyFotoGame(img, button) {
 
         const pngBlob = await new Promise((resolve, reject) => {
 
-            canvas.toBlob(function (hasil) {
+            canvas.toBlob((hasil) => {
 
                 if (hasil) {
                     resolve(hasil);
@@ -363,6 +366,8 @@ async function copyFotoGame(img, button) {
             })
         ]);
 
+        console.log("✅ FOTO BERHASIL DICOPY");
+
         button.innerHTML = "📸 FOTO COPIED ✔";
 
         setTimeout(() => {
@@ -371,8 +376,6 @@ async function copyFotoGame(img, button) {
             button.disabled = false;
 
         }, 1800);
-
-        console.log("✅ FOTO BERHASIL DICOPY");
 
     } catch (error) {
 
@@ -413,7 +416,7 @@ function polaGame(id, button) {
 
 
 // ========================================
-// CARI FOTO OTOMATIS
+// CARI FOTO
 // ========================================
 
 function cariFoto(i, img) {
@@ -457,7 +460,7 @@ function cariFoto(i, img) {
         img.onload = function () {
 
             console.log(
-                `✅ FOTO GAME ${i} BERHASIL: ${path}`
+                `✅ FOTO ${i} BERHASIL: ${path}`
             );
 
         };
@@ -481,80 +484,85 @@ function cariFoto(i, img) {
 
 // ========================================
 // BUAT 36 GAME
-// TANPA TULISAN GAME 1 - GAME 36
 // ========================================
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const container =
-        document.getElementById("gameContainer");
+        const container =
+            document.getElementById("gameContainer");
 
-    if (!container) {
+        if (!container) {
 
-        console.error(
-            "❌ gameContainer tidak ditemukan"
-        );
+            console.error(
+                "❌ gameContainer tidak ditemukan"
+            );
 
-        return;
+            return;
+        }
+
+        container.innerHTML = "";
+
+        for (let i = 1; i <= 36; i++) {
+
+            const game = dataGame[i];
+
+            if (!game) continue;
+
+            const gameBox =
+                document.createElement("article");
+
+            gameBox.className = "game-box";
+
+
+            // ========================================
+            // TANPA JUDUL GAME DI BAWAH FOTO
+            // ========================================
+
+            gameBox.innerHTML = `
+
+                <div class="image-wrapper">
+
+                    <img
+                        class="game-image"
+                        alt=""
+                    >
+
+                </div>
+
+                <div class="button-group">
+
+                    <button
+                        type="button"
+                        class="btn btn-saran"
+                        onclick="saranGame(${i}, this)"
+                    >
+                        🎯 SARAN GAME
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-pola"
+                        onclick="polaGame(${i}, this)"
+                    >
+                        🔥 POLA GAME
+                    </button>
+
+                </div>
+
+            `;
+
+            const img =
+                gameBox.querySelector(".game-image");
+
+            cariFoto(i, img);
+
+            container.appendChild(gameBox);
+
+        }
+
+        console.log("✅ 36 GAME SELESAI DIBUAT");
+
     }
-
-    container.innerHTML = "";
-
-    for (let i = 1; i <= 36; i++) {
-
-        const game = dataGame[i];
-
-        if (!game) continue;
-
-        const gameBox =
-            document.createElement("article");
-
-        gameBox.className = "game-box";
-
-        gameBox.innerHTML = `
-
-            <div class="image-wrapper">
-
-                <img
-                    class="game-image"
-                    alt="Foto game"
-                >
-
-            </div>
-
-            <div class="button-group">
-
-                <button
-                    type="button"
-                    class="btn btn-saran"
-                    onclick="saranGame(${i}, this)"
-                >
-                    🎯 SARAN GAME
-                </button>
-
-                <button
-                    type="button"
-                    class="btn btn-pola"
-                    onclick="polaGame(${i}, this)"
-                >
-                    🔥 POLA GAME
-                </button>
-
-            </div>
-
-        `;
-
-        const img =
-            gameBox.querySelector(".game-image");
-
-        cariFoto(i, img);
-
-        container.appendChild(gameBox);
-
-    }
-
-    console.log(
-        "✅ 36 GAME SELESAI"
-    );
-
-});
+);
