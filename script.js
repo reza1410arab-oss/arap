@@ -371,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // PATH FOTO
         // ========================================
 
-        const imagePath = "./img/game" + i + ".jpg";
+        const imagePath = "./game" + i + ".jpg";
 
 
         // ========================================
