@@ -7,7 +7,7 @@
 const dataGame = {
 
     1: {
-        nama: "MAHJONG WAYS 1",
+        nama: 
         saran: [`Dicoba bermain di game ini bos, lagi gacor bosku di PG SOFT - Mahjong WAYS
 
 🔥 10x SPIN OTOMATIS TURBO ON
